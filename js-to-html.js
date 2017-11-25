@@ -1,4 +1,6 @@
 "use strict";
+/*jshint eqnull:true */
+/*jshint node:true */
 
 (function codenautasModuleDefinition(root, name, factory) {
     /* global define */
@@ -39,7 +41,14 @@ var htmlReservedSymbols={
     '<' :'&lt;',
     '>' :'&gt;',
     "'" :'&#39;',
-    '"' :'&quot;'
+    '"' :'&quot;',
+    'ö' :'&ouml;',
+    'ü' :'&uuml;',
+    'ä' :'&auml;',
+    'Ö' :'&Ouml;',
+    'Ü' :'&Uuml;',
+    'Ä' :'&Auml;',
+    'ß' :'&szlig;'
 };
 
 jsToHtml.html={
@@ -48,7 +57,7 @@ jsToHtml.html={
 
 function escapeChar(simpleText){
     simpleText=''+simpleText;
-    return /[&<>'"]/.test(simpleText)?simpleText.replace(/[&<>'"]/g,function(c){ return htmlReservedSymbols[c]; }):simpleText;
+    return /[&<>'öüäÖÜÄß"]/.test(simpleText)?simpleText.replace(/[&<>'öüäÖÜÄß"]/g,function(c){ return htmlReservedSymbols[c]; }):simpleText;
 }
 
 jsToHtml.couldDirectTextContent=function couldDirectTextContent(x){
@@ -110,7 +119,6 @@ var validDirectProperties={
                         /*jshint forin:true */
                         var attrInfo=jsToHtml.htmlAttributes[attrName];
                         if(/-/.test(attrName)){
-                            /*eslint no-empty: 0 */
                         }else if(!attrInfo){
                             throw new Error("inexistent attribute "+JSON.stringify(attrName));
                         }else{
