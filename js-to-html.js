@@ -48,7 +48,8 @@ var htmlReservedSymbols={
     'Ö' :'&Ouml;',
     'Ü' :'&Uuml;',
     'Ä' :'&Auml;',
-    'ß' :'&szlig;'
+    'ß' :'&szlig;',
+    'á' :'&#225;'
 };
 
 jsToHtml.html={
@@ -57,7 +58,7 @@ jsToHtml.html={
 
 function escapeChar(simpleText){
     simpleText=''+simpleText;
-    return /[&<>'öüäÖÜÄß"]/.test(simpleText)?simpleText.replace(/[&<>'öüäÖÜÄß"]/g,function(c){ return htmlReservedSymbols[c]; }):simpleText;
+    return /[&<>'öüäÖÜÄßá"]/.test(simpleText)?simpleText.replace(/[&<>'öüäÖÜÄßá"]/g,function(c){ return htmlReservedSymbols[c]; }):simpleText;
 }
 
 jsToHtml.couldDirectTextContent=function couldDirectTextContent(x){
